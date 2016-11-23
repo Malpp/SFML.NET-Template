@@ -21,7 +21,7 @@ namespace SFML.Net_Template
 		/// <returns>
 		/// Retourne la distance entre les deux points
 		/// </returns>
-		float DistanceBetweenTwoPoints(Vector2f point1, Vector2f point2)
+		public static float DistanceBetweenTwoPoints(Vector2f point1, Vector2f point2)
 		{
 
 			return Convert.ToSingle(Math.Sqrt(Math.Pow(point2.X - point1.X, 2) + Math.Pow(point2.Y - point1.Y, 2)));
@@ -33,7 +33,7 @@ namespace SFML.Net_Template
 		/// </summary>
 		/// <param name="radian">L'angle en radian</param>
 		/// <returns>Retourne l'angle convertit</returns>
-		float RadianToDegree(float radian)
+		public static float RadianToDegree(float radian)
 		{
 
 			return 180.0f * radian / PI;
@@ -45,7 +45,7 @@ namespace SFML.Net_Template
 		/// </summary>
 		/// <param name="degree">L'angle en degré</param>
 		/// <returns>Retourne l'angle convertit</returns>
-		float DegreeToRadian(float degree)
+		public static float DegreeToRadian(float degree)
 		{
 
 			return PI * degree / 180.0f;

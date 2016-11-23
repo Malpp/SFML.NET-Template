@@ -23,6 +23,13 @@ namespace SFML.Net_Template
 		Clock clock = new Clock();
 		Time gameTime = new Time();
 
+		//FPS vars
+		float timeElapsed = 0;
+		int fps = 0;
+
+		int WINDOW_HEIGHT;
+		int WINDOW_WIDTH;
+
 		#endregion
 
 		/// <summary>
@@ -43,6 +50,10 @@ namespace SFML.Net_Template
 			//Add the Closed function to the window
 			window.Closed += window_Closed;
 
+			//Inits window height and width global vars
+			WINDOW_HEIGHT = (int)windowHeight;
+			WINDOW_WIDTH = (int)windowWidth;
+
 		}
 
 
@@ -53,6 +64,10 @@ namespace SFML.Net_Template
 		{
 
 			window.SetVisible(true);
+
+			SetUpGlobalVars();
+
+			clock.Restart();
 
 			while(window.IsOpen)
 			{
@@ -67,6 +82,16 @@ namespace SFML.Net_Template
 				Draw();
 
 			}
+
+
+		}
+
+		/// <summary>
+		/// Sets up global vars to the program
+		/// </summary>
+		void SetUpGlobalVars()
+		{
+
 
 
 		}
@@ -118,6 +143,21 @@ namespace SFML.Net_Template
 		{
 			
 			gameTime = clock.Restart();
+
+			timeElapsed += gameTime.AsSeconds();
+
+			if (timeElapsed > 1)
+			{
+
+				Console.WriteLine("FPS: {0}", fps);
+
+				fps = 0;
+				timeElapsed = 0;
+
+			}
+
+			fps++;
+
 
 		}
 
