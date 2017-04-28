@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace SFML.Net_Template
 {
-	class Useful
+	public static class Common
 	{
 
-		//Pi in float instead of default double
-		static readonly float PI = Convert.ToSingle(Math.PI);
+		//Pierre, regarde pas cette class
+		//Elle est par defaut dans mon template SFML
 
 		/// <summary>
 		/// Calcul de la distance entre deux points
@@ -28,6 +28,16 @@ namespace SFML.Net_Template
 
 		}
 
+		public static Vector2f MovePointByAngle(float moveBy, float angle)
+		{
+			return new Vector2f((float)Math.Cos(Common.DegreeToRadian(angle)) * moveBy, (float)Math.Sin(Common.DegreeToRadian(angle)) * moveBy);
+		}
+
+		public static float AngleBetweenTwoPoints(Vector2f p1, Vector2f p2)
+		{
+			return (float)Math.Atan2(p2.Y - p1.Y, p2.X - p1.X) * 180f / (float)Math.PI;
+		}
+
 		/// <summary>
 		/// Convertit un angle en radian vers un angle en degré
 		/// </summary>
@@ -36,7 +46,7 @@ namespace SFML.Net_Template
 		public static float RadianToDegree(float radian)
 		{
 
-			return 180.0f * radian / PI;
+			return 180.0f * radian / (float)Math.PI;
 
 		}
 
@@ -48,7 +58,7 @@ namespace SFML.Net_Template
 		public static float DegreeToRadian(float degree)
 		{
 
-			return PI * degree / 180.0f;
+			return (float)Math.PI * degree / 180.0f;
 
 		}
 

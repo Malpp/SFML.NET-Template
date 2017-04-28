@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace SFML.Net_Template
 {
-	class Application
+	class Game
 	{
 
 		#region Global vars
@@ -27,8 +27,9 @@ namespace SFML.Net_Template
 		float timeElapsed = 0;
 		int fps = 0;
 
-		int WINDOW_HEIGHT;
-		int WINDOW_WIDTH;
+		//Height and width of the game window
+		public const int GAME_HEIGHT = 500;
+		public const int GAME_WIDTH = 500;
 
 		#endregion
 
@@ -39,20 +40,13 @@ namespace SFML.Net_Template
 		/// <param name="windowWidth">Width of the window</param>
 		/// <param name="title">Title of the window</param>
 		/// <param name="style">Style of the window</param>
-		public Application(uint windowHeight = 300, uint windowWidth = 300, string title = "SFML APP", Styles style = Styles.Close)
+		public Game(uint windowHeight = GAME_HEIGHT, uint windowWidth = GAME_WIDTH, string title = "SFML APP", Styles style = Styles.Close)
 		{
 
 			window = new RenderWindow(new VideoMode(windowWidth, windowHeight), title, style);
 
-			//Add the keypressed function to the window
-			window.KeyPressed += window_KeyPressed;
-
 			//Add the Closed function to the window
 			window.Closed += window_Closed;
-
-			//Inits window height and width global vars
-			WINDOW_HEIGHT = (int)windowHeight;
-			WINDOW_WIDTH = (int)windowWidth;
 
 		}
 
@@ -65,11 +59,11 @@ namespace SFML.Net_Template
 
 			window.SetVisible(true);
 
-			SetUpGlobalVars();
+			InitGame();
 
 			clock.Restart();
 
-			while(window.IsOpen)
+			while(window.IsOpen && !Keyboard.IsKeyPressed(Keyboard.Key.Escape))
 			{
 
 				//Call the Events
@@ -89,52 +83,22 @@ namespace SFML.Net_Template
 		/// <summary>
 		/// Sets up global vars to the program
 		/// </summary>
-		void SetUpGlobalVars()
+		void InitGame()
 		{
 
 
 
-		}
-
-		#region Input functions
-
-		/// <summary>
-		/// Called whenever a key is pressed
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e">The key event</param>
-		void window_KeyPressed(object sender, KeyEventArgs e)
-		{
-
-			//Debug output of keyPressed
-			//Console.WriteLine(e.Code);
-
-			switch(e.Code)
-			{
-
-				case Keyboard.Key.Escape:
-					window.Close();
-					break;
-
-				default:
-					break;
-
-			}
 		}
 
 		/// <summary>
 		/// Called when the window "X" is clicked
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
 		void window_Closed(object sender, EventArgs e)
 		{
 
 			window.Close();
 
 		}
-
-		#endregion
 
 		/// <summary>
 		/// Update code of the program
@@ -143,6 +107,8 @@ namespace SFML.Net_Template
 		{
 			
 			gameTime = clock.Restart();
+
+			#region FPS
 
 			timeElapsed += gameTime.AsSeconds();
 
@@ -158,6 +124,8 @@ namespace SFML.Net_Template
 
 			fps++;
 
+			#endregion
+
 
 		}
 
@@ -168,6 +136,8 @@ namespace SFML.Net_Template
 		{
 
 			window.Clear();
+
+			//Code goes here lul
 
 			window.Display();
 

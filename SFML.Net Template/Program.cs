@@ -11,7 +11,7 @@ namespace SFML.Net_Template
 		static void Main(string[] args)
 		{
 
-			Application app = new Application();
+			Game app = new Game();
 
 			app.Run();
 
